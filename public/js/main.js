@@ -44,7 +44,7 @@ $(document).ready(function() {
 
           var $list = $('<ul></ul>');
 
-          for(var i = 0; i < 10; i ++){
+          for(var i = 0; i < 20; i ++){
             $list.append($('<li></li>').text(data[i].name));
           }
 

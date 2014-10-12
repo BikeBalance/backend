@@ -53,7 +53,7 @@ exports.hint = function(req, res) {
 
     var replyNotUser = function() {
       console.log("reply not user");
-      sendSms("Welcome to http://BorisBike.me. Register for free to start playing.", from, function(err, ok) { console.log(err, ok); });
+      sendSms(from, "Welcome to http://BorisBike.me. Register for free to start playing.", function(err, ok) { console.log(err, ok); });
         // res.send(makeReply("Welcome to BorisBike.me. To start playing, please create a free account.", res));
     };
     var replyUser = function(user) {
@@ -72,14 +72,14 @@ exports.hint = function(req, res) {
             txt = "Go around " + docs.name +".";
           }
           console.log("sending " + txt);
-          sendSms(txt, from, function(err, ok) { console.log(err, ok); });
+          sendSms(from, txt, function(err, ok) { console.log(err, ok); });
           //res.send(makeReply(txt, res));
         });
 
       } else {
         var txt = "Sorry, you have insufficient hint credits. Top up at http://birisbike.me/get-credit";
         //res.send(makeReply(txt, res));
-
+        sendSms(from,txt, function(err, ok) { console.log(err, ok); });
       }
     };
 

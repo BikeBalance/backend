@@ -118,7 +118,9 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
 * MAIN CONTROLLERs
 */
 
-app.get('/stations', stationController.index)
+app.get('/stations', stationController.index);
+app.get('/stations/:lat,:long', stationController.nearby);
+
 
 /**
  * Main routes.

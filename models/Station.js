@@ -9,6 +9,8 @@ var stationSchema = new mongoose.Schema({
   installed: Boolean,
   locked: Boolean,
   nbDocks: Number,
+  nbBikes: Number,
+  need: Number,
   threshold: Array
 });
 

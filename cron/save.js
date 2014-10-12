@@ -2,7 +2,7 @@ var http = require("http");
 var xml2js = require("xml2js");
 var r = require('./run.js');
 var Station = require("../models/Station");
-
+var funcs = require("../models/func");
 var DATA_URL = "http://www.tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml";
 
 r.r(function(db, redis) {
@@ -19,6 +19,9 @@ r.r(function(db, redis) {
             return;
           }
       //    console.log(station);
+      var bikes = parseInt(station.nbBikes);
+      var docks = parseInt(station.nbDocks);
+
           md = {
             name: station.name,
             terminalName: station.terminalName,
@@ -27,6 +30,8 @@ r.r(function(db, redis) {
             lat: parseFloat(station.lat),
             installed: station.installed,
             locked: station.locked,
+            nbBikes: parseInt(station.nbBikes),
+            need: funcs.need(bikes, docks, 0.6),
             nbDocks: parseInt(station.nbDocks),
             threshold: [0.5, 0.5, 0.5,
                         0.5, 0.5, 0.5,

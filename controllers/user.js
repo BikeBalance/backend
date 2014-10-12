@@ -129,9 +129,13 @@ exports.getCredits = function(req, res) {
 };
 
 exports.payment_done = function(req, res) {
+  console.log("payment_done path = " + req.path);
   var uid = req.params["user_id"];
+  console.log("user id " +uid);
   User.findById(uid, function(err, user) {
     if (err) return;
+    if (user == null) { console.log( "no user found."); return; }
+
 
     // req.body;
     // todo: validate paypal request.

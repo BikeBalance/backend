@@ -10,6 +10,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "twilio": "*",
     "xml2js": "*",
     "redis":"*",
     "async": "^0.9.0",

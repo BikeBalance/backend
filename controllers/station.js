@@ -59,7 +59,7 @@ exports.top = function(req, res) {
       return;
     }
     res.send(JSON.stringify(docs));
-  })
+  });
 }
 
 /*

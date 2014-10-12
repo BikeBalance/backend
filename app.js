@@ -124,13 +124,19 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
 * MAIN CONTROLLERs
 */
 
+var twilioCtrl = require('./controllers/twilio');
+
 app.get('/stations', stationController.index);
 app.get('/stations/:lat,:long', stationController.nearby);
 app.get('/stations/top', stationController.top);
 app.get('/stations/destination/:lat,:long', stationController.destinations);
 
 app.get('/get-credits', userController.getCredits);
+
 app.post('/payment/callback/:user/processed', userController.payment_done);
+app.post('/twiliocallback', twilioCtrl.hint);
+
+app.get('/twilio-test-sms/:to', twilioCtrl.textHello);
 /**
  * Main routes.
  */

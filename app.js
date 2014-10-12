@@ -127,7 +127,7 @@ app.get('/stations/top', stationController.top);
 app.get('/stations/destination/:lat,:long', stationController.destinations);
 
 app.get('/get-credits', userController.getCredits);
-app.get('/payment/callback/:user/processed', userController.payment_done);
+app.post('/payment/callback/:user/processed', userController.payment_done);
 /**
  * Main routes.
  */

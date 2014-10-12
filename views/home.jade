@@ -37,5 +37,12 @@ block content
         p We'll text you back a location so you can start cycling without the guesswork!
   hr
   div#map.row
-    div.col-md-8
+    div.col-md-8.col-md-offset-2
+      h2.text-center See live action!
       div#map-canvas(style="max-width:100%;height:500px")
+  hr
+  if !user
+    div.row
+      div.text-center
+        a.btn.btn-primary.btn-lg(href='/signup', role='button') Let's start exploring
+

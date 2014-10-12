@@ -1,12 +1,29 @@
 var http = require("http");
 var xml2js = require("xml2js");
-var r = require('./run.js');
 var Station = require("../models/Station");
 var funcs = require("../models/func");
 var DATA_URL = "http://www.tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml";
 
-r.r(function(db, redis) {
+// calls callback(error, null) or callback(null, body_as_string)
+var fetchUrl = function(url, callback) {
+  http.get(url, function(res) {
+    if (res.statusCode != 200) {
+      callback("weird status code: " + res.statusCode);
+      return;
+    }
 
+    res.setEncoding('utf8');
+    var body = "";
+    res.on("data", function(chunk) {
+      body += chunk;
+    });
+    res.on("end", function() { callback(null, body); });
+  }).on('error', function(e) {
+    callback("Got error: " + e.message);
+  });
+};
+
+exports.job = function(db, redis) {
 
   // assumes three samples per day, 7 per week.
   addIfNeeded = function(station) {
@@ -44,8 +61,6 @@ r.r(function(db, redis) {
                         0.5, 0.5, 0.5,
                         0.5, 0.5, 0.5],
           };
-        //  console.log("MD=");
-          //console.log(md);
         var model = new Station(md);
         model.save(function(err) { console.log((new Date()) + " saved model " + md.terminalName + " err = " + err)});
       });
@@ -53,7 +68,7 @@ r.r(function(db, redis) {
   };
 
 
-  r.fetchUrl(DATA_URL, function(err, data) {
+  fetchUrl(DATA_URL, function(err, data) {
     if (err) {
       console.log(err);
       return;
@@ -86,4 +101,4 @@ r.r(function(db, redis) {
       });
     });
   });
-});
+};

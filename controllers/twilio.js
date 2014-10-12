@@ -65,10 +65,11 @@ exports.hint = function(req, res) {
         }, function(err, docs) {
           if (err) { console.log("error retreiving hint"); return; }
           var text;
-          if (data == null) {
+          if (docs == null) {
             txt = "There's nothing we can tell you. Your hint credits are also untouched.";
           } else {
             user.credit = user.credit - 1;
+            user.save();
             txt = "Go around " + docs.name +".";
           }
           console.log("sending " + txt);
@@ -82,9 +83,11 @@ exports.hint = function(req, res) {
         sendSms(from,txt, function(err, ok) { console.log(err, ok); });
       }
     };
+    console.log("from = " + from);
 
     // if there's a user, otherwise ask them to sign up
     User.findOne({phone: from}, function(err, data){
+      console.log(err, data);
       if (err || data == null) { replyNotUser(); return; }
       replyUser(data);
     });

@@ -57,8 +57,8 @@ exports.hint = function(req, res) {
         // res.send(makeReply("Welcome to BorisBike.me. To start playing, please create a free account.", res));
     };
     var replyUser = function(user) {
-
-      if (user.credit >= 1) {
+      console.log(user);
+      if (user.credits >= 1) {
         Station.findOne({
           $query: {},
           $orderby: {need:1}

@@ -38,5 +38,20 @@ $(document).ready(function() {
         });
     }
 
+    if($('#list-top').length){
+      $.get('http://borisbike.me/stations/top', function (d){
+          var data = JSON.parse(data);
+
+          var $list = $('<ul></ul>');
+
+          for(var i = 0; i < 10; i ++){
+            $list.append($('<li></li>').text(data[i].name));
+          }
+
+          $('#list-top').html(list);
+
+      });
+    }
+
 
 });

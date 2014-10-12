@@ -27,6 +27,27 @@ exports.nearby = function(req, res) {
   });
 };
 
+exports.destinations = function(req, res) {
+  Station.findOne({
+    $query: {
+      location: {
+        $nearSphere: {
+          $geometry: {type: "Point", coordinates: [parseFloat(req.params["long"]), parseFloat(req.params["lat"])]},
+          $minDistance: 1500,
+          $maxDistance: 5000
+        }
+      }
+    },
+    $orderby: {need: -1}
+  }, function(err, docs) {
+    if (err != null) {
+      res.send(JSON.stringify({"err": err}));
+      return;
+    }
+    res.send(JSON.stringify(docs));
+  });
+}
+
 exports.top = function(req, res) {
   Station.find({
     $query: {},

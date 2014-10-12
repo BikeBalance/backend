@@ -10,17 +10,20 @@ r.r(function(db, redis) {
 
   // assumes three samples per day, 7 per week.
   addIfNeeded = function(station) {
-    console.log("add if needed...");
     Station.find({"terminalName": station.terminalName}, function(err, res) {
         Station.where({"terminalName": station.terminalName}).findOne(function(err, obj) {
           if (err != null) { console.log("mongo error. "); return; }
+
+          var bikes = parseInt(station.nbBikes);
+          var docks = parseInt(station.nbDocks);
+
           if (obj) {
-            console.log(" no update in mongo. ");
+            obj.nbBikes = bikes;
+            obj.nbDocks = docks;
+            obj.need = funcs.need(bikes, docks, 0.6);
+            obj.save(function(err) { console.log((new Date()) + " updated model " + obj.terminalName); })
             return;
           }
-      //    console.log(station);
-      var bikes = parseInt(station.nbBikes);
-      var docks = parseInt(station.nbDocks);
 
           md = {
             name: station.name,
@@ -44,7 +47,7 @@ r.r(function(db, redis) {
         //  console.log("MD=");
           //console.log(md);
         var model = new Station(md);
-        model.save(function(err) { console.log((new Date()) + " saved model. RESULTING ERROR  (null means ok) = " + err)});
+        model.save(function(err) { console.log((new Date()) + " saved model " + md.terminalName + " err = " + err)});
       });
     });
   };

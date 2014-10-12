@@ -61,7 +61,7 @@ var week = day * 7;
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/url1', '/url2'];
+var csrfExclude = ['/url1', '/url2', '/payment'];
 
 /**
  * Express configuration.
@@ -95,6 +95,9 @@ app.use(passport.session());
 app.use(flash());
 app.use(function(req, res, next) {
   // CSRF protection.
+  if (req.path.indexOf("/payment/callback") >= 0) {
+    return next();
+  }
   if (_.contains(csrfExclude, req.path)) return next();
   csrf(req, res, next);
 });

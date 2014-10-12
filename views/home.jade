@@ -1,35 +1,37 @@
 extends layout
 
 block content
-  h1 BorisBike.me - the bike balancer project
-  p.lead Improve your community by helping balancing bikes around London!
+  div.text-center
+    img(style="max-width:100%;", src="/images/logo.png")
+    h1.text-center BorisBike.me - the bike balancer project
+    p.lead.text-center Improve your community by helping balancing bikes around London!
   hr
   if !user
     .row
-      .col-sm-6
+      .col-md-4
         h2 How it works?
         p When you're near an overflowed docking station, we'll send you a notification. If you open it, we tell you where to move a bike. You cycle and win points. That simple!
-        p
+        p.text-center
           a.btn.btn-default(href='/signup', role='button') Sign up
-      .col-sm-6
+      .col-md-4
         h2 Hate the guesswork?
         p Text 'hint' to 04327532524 and we'll let you know where to start. Sign up now and get 3 free hints!
-      .col-sm-6
+      .col-md-4
         h2 Make London Better
         p Balancing bikes will eventually remove the vans that are currently use to do this task. And you get to exercise a bit. And there's more: we have awesome prizes coming up soon!
 
   else
     .row
-      .col-sm-6
+      .col-md-4
         h2 Go out! We notify you when you can help!
         p We'll send a notification straight to your phone when you're near a docking station that has an overflow of bikes.
 
-      .col-sm-6
+      .col-md-4
         h2 Don't want to wait? Get a hint!
         p A hint costs a credit. You currently have #{user.credits} credits.
-        p
+        p.text-center
           a.btn.btn-default(href='/get-credits', role='button') Buy more credits
 
-      .col-sm-6
+      .col-md-4
         h2 Text 'hint' at 074325426435.
         p We'll text you back a location so you can start cycling without the guesswork!

@@ -120,7 +120,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
 
 app.get('/stations', stationController.index);
 app.get('/stations/:lat,:long', stationController.nearby);
-
+app.get('/stations/top', stationController.top);
 
 /**
  * Main routes.

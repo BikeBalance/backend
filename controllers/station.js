@@ -27,6 +27,20 @@ exports.nearby = function(req, res) {
   });
 };
 
+exports.top = function(req, res) {
+  Station.find({
+    $query: {},
+    $orderby: {need:1},
+    $limit: 99
+  }, function(err, docs) {
+    if (err != null) {
+      res.send(JSON.stringify({"err": err}));
+      return;
+    }
+    res.send(JSON.stringify(docs));
+  })
+}
+
 /*
 exports.geo = function(req, res) {
 

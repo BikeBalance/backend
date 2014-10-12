@@ -61,7 +61,7 @@ var week = day * 7;
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/url1', '/url2', '/payment', 'twiliocallback'];
+var csrfExclude = ['/url1', '/url2', '/payment', '/twiliocallback'];
 
 /**
  * Express configuration.

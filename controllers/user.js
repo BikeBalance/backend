@@ -140,7 +140,7 @@ exports.payment_done = function(req, res) {
     // req.body;
     // todo: validate paypal request.
 
-    user.credits += 3;
+    user.credits += 15;
     user.save();
   });
 };

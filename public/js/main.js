@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     if($('#list-top').length){
       $.get('http://borisbike.me/stations/top', function (d){
-          var data = JSON.parse(data);
+          var data = JSON.parse(d);
 
           var $list = $('<ul></ul>');
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
             $list.append($('<li></li>').text(data[i].name));
           }
 
-          $('#list-top').html(list);
+          $('#list-top').append($list);
 
       });
     }

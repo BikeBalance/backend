@@ -11,11 +11,11 @@ block content
       .col-md-4
         h2 How it works?
         p When you're near an overflowed docking station, we'll send you a notification. If you open it, we tell you where to move a bike. You cycle and win points. That simple!
-        p.text-center
-          a.btn.btn-default(href='/signup', role='button') Sign up
       .col-md-4
         h2 Hate the guesswork?
         p Text 'hint' to 04327532524 and we'll let you know where to start. Sign up now and get 3 free hints!
+        p.text-center
+          a.btn.btn-default.btn-lg(href='/signup', role='button') Sign up
       .col-md-4
         h2 Make London Better
         p Balancing bikes will eventually remove the vans that are currently use to do this task. And you get to exercise a bit. And there's more: we have awesome prizes coming up soon!
@@ -30,8 +30,12 @@ block content
         h2 Don't want to wait? Get a hint!
         p A hint costs a credit. You currently have #{user.credits} credits.
         p.text-center
-          a.btn.btn-default(href='/get-credits', role='button') Buy more credits
+          a.btn.btn-default.btn-lg(href='/get-credits', role='button') Buy more credits
 
       .col-md-4
         h2 Text 'hint' at 074325426435.
         p We'll text you back a location so you can start cycling without the guesswork!
+  hr
+  div#map.row
+    div.col-md-8
+      div#map-canvas(style="max-width:100%;height:500px")

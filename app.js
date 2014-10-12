@@ -122,6 +122,9 @@ app.get('/stations', stationController.index);
 app.get('/stations/:lat,:long', stationController.nearby);
 app.get('/stations/top', stationController.top);
 app.get('/stations/destination/:lat,:long', stationController.destinations);
+
+app.get('/get-credits', userController.getCredits);
+app.get('/payment/callback/:user/processed', userController.payment_done);
 /**
  * Main routes.
  */

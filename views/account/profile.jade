@@ -63,7 +63,7 @@ block content
   .page-header
     h3 Delete Account
 
-  p You can delete your account, but keep in mind this action is irreversible.
+  p You can delete your account, but keep in mind this action is irreversible and you lose all the credits you currently have.
   form(action='/account/delete', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     button.btn.btn-danger(type='submit')

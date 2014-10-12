@@ -122,6 +122,25 @@ exports.getAccount = function(req, res) {
   });
 };
 
+exports.getCredits = function(req, res) {
+  res.render('credits', {
+    title: 'Buy credits'
+  });
+};
+
+exports.payment_done = function(req, res) {
+  var uid = req.params["user_id"];
+  User.findById(uid, function(err, user) {
+    if (err) return;
+
+    // req.body;
+    // todo: validate paypal request.
+
+    user.credits += 3;
+    user.save();
+  });
+};
+
 /**
  * POST /account/profile
  * Update profile information.

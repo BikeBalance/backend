@@ -130,7 +130,7 @@ exports.getCredits = function(req, res) {
 
 exports.payment_done = function(req, res) {
   console.log("payment_done path = " + req.path);
-  var uid = req.params["user_id"];
+  var uid = req.params["user"];
   console.log("user id " +uid);
   User.findById(uid, function(err, user) {
     if (err) return;
